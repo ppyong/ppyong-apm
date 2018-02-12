@@ -1,9 +1,9 @@
-package com.devluff.network;
+package com.devluff.agent.network;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.devluff.scheduler.Schedule;
+import com.devluff.agent.scheduler.Schedule;
 
 /**
  * Server Agent 로의 Server 정보를 보내기 위한 Thread

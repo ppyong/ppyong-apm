@@ -1,13 +1,13 @@
-package com.devluff.scheduler;
+package com.devluff.agent.scheduler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import com.devluff.agent.network.NetworkClientThread;
+import com.devluff.agent.network.NetworkServerThread;
 import com.devluff.commons.util.FileUtil;
-import com.devluff.network.NetworkClientThread;
-import com.devluff.network.NetworkServerThread;
 
 @Service
 public class ServerResourceScheduler {

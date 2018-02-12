@@ -1,4 +1,4 @@
-package com.devluff;
+package com.devluff.server;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

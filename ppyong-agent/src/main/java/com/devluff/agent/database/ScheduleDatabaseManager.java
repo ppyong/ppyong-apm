@@ -1,4 +1,4 @@
-package com.devluff.database;
+package com.devluff.agent.database;
 
 public class ScheduleDatabaseManager {
 	

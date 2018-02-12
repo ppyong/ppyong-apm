@@ -1,6 +1,6 @@
-package com.devluff.network;
+package com.devluff.agent.network;
 
-import com.devluff.scheduler.Schedule;
+import com.devluff.agent.scheduler.Schedule;
 
 public class NetworkServerThread extends Thread{
 	

@@ -1,0 +1,50 @@
+repositories {
+    jcenter()
+}
+
+buildscript {
+	ext {
+		springBootVersion = '1.5.3.RELEASE'
+	}
+	repositories {
+		jcenter()
+	}
+	dependencies {
+		classpath(
+			"org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+		)
+	}
+}
+
+allprojects {
+	 apply plugin: 'java'
+	 apply plugin: 'eclipse'
+
+	// JDK 7
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+	
+	compileJava.options.encoding = 'UTF-8'
+}
+	  
+subprojects { 
+    repositories {
+       jcenter()
+    }
+ 
+    dependencies {
+    		compile 'org.slf4j:slf4j-api:1.7.21'
+    		compile 'ch.qos.logback:logback-classic:1.1.7'
+		compile 'com.google.guava:guava:24.0-jre'
+    }
+ 
+    //jar {
+    //    manifest.attributes provider: 'gradle'
+    //}
+	    
+	    // 이클립스에서 프로젝트를 사용하기 위함 
+	eclipse {
+		 project.natures 'org.springsource.ide.eclipse.gradle.core.nature'
+	}
+}
+

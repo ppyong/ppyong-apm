@@ -1,0 +1,2 @@
+rootProject.name = 'ppyong-agent'
+include ':ppyong-commons'

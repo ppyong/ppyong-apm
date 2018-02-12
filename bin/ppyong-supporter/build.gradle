@@ -1,0 +1,11 @@
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    	compile 'org.springframework.boot:spring-boot-starter'
+    	compile 'io.netty:netty-all:4.0.4.Final'
+}

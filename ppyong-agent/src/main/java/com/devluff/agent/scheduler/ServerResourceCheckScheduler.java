@@ -2,6 +2,7 @@ package com.devluff.agent.scheduler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -10,23 +11,14 @@ import com.devluff.agent.network.NetworkServerThread;
 import com.devluff.commons.util.FileUtil;
 
 @Service
-public class ServerResourceScheduler {
+public class ServerResourceCheckScheduler {
 	
 	private static final Logger logger = LoggerFactory.getLogger(NetworkClientThread.class);
 	
+	@Autowired
 	private Schedule oSchedule;
-	private NetworkClientThread oNetworkClientThread;
-	private NetworkServerThread oNetworkServerThread;
-	
-	public ServerResourceScheduler() {
-		oSchedule = new Schedule();
-		oNetworkClientThread = new NetworkClientThread(oSchedule);
-		oNetworkServerThread = new NetworkServerThread(oSchedule);
-	}
 	
 	public boolean init() {
-		oNetworkClientThread.start();
-		oNetworkServerThread.start();
 		return true;
 	}
 	
@@ -47,6 +39,10 @@ public class ServerResourceScheduler {
 			logger.error(e.getMessage());
 			return false;
 		}
+		return true;
+	}
+	
+	public boolean finish() {
 		return true;
 	}
 

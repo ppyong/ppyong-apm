@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 public class XmlParser {
 	
 	private static final Logger logger = LoggerFactory.getLogger(XmlParser.class);
+	
 	private Document oDocument;
 	private Element oRootElement;
 	

@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class DateUtil {
 	
-	public static String convertDateToStringByFormat(Date oDate) {
+	public static String convertDateToString(Date oDate) {
 		return convertDateToStringByFormat(oDate, "yyyy-MM-dd hh:mm:ss");
 	}
 	

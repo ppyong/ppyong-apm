@@ -5,7 +5,9 @@ import java.util.concurrent.BlockingQueue;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
+@Service
 public class Schedule {
 	
 	private static final Logger logger = LoggerFactory.getLogger(Schedule.class);

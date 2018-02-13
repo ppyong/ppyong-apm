@@ -1,7 +1,10 @@
 package com.devluff.agent.network;
 
+import java.util.concurrent.CountDownLatch;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.devluff.agent.scheduler.Schedule;
 
@@ -10,53 +13,51 @@ import com.devluff.agent.scheduler.Schedule;
  * @author ppyong
  *
  */
+// 1) 정책에 따라 생성된 데이터를 Server로 전송 
 public class NetworkClientThread extends Thread{
 	
 	private static final Logger logger = LoggerFactory.getLogger(NetworkClientThread.class);
 
+	@Autowired private Schedule oSchedule;
+	
 	private boolean isContinued;
-	private String strThreadName;
-	private int	nSleepTimeSecond;
-	private Schedule oSchedule;
+	private Object oLock;
+	private CountDownLatch oLatch;
 	
-	public NetworkClientThread(Schedule schedule) {
-		this("NetworkClientThread", 10, schedule);
+	public NetworkClientThread() {
+		this("NetworkClientThread");
 	}
 	
-	public NetworkClientThread(int nSleepTimeSecond, Schedule schedule) {
-		this("NetworkClientThread", nSleepTimeSecond, schedule);
+	public NetworkClientThread(String strThreadName) {
+		super(strThreadName);
 	}
 	
-	public NetworkClientThread(String strThreadName, Schedule schedule) {
-		this(strThreadName, 10, schedule);
-	}
-	
-	public NetworkClientThread(String strThreadName, int nSleepTimeSecond, Schedule oSchedule) {
-		this.strThreadName = strThreadName;
-		this.nSleepTimeSecond = nSleepTimeSecond;
-		this.oSchedule = oSchedule;
+	public void setCountDownLatch(CountDownLatch oLatch) {
+		this.oLatch = oLatch;
 	}
 	
 	public void run() {
-		this.isContinued = true;
+		isContinued = true;
 		try {
-			while(this.isContinued) {
-				// 작업 
+			while(isContinued) {
 				String task = oSchedule.getTaskFromTaskQue();
-				
-				// 처리 
-				
-				Thread.sleep(nSleepTimeSecond * 1000);
+				synchronized (oLock) {
+					// 작업 
+				}
 			}
 		}catch (Exception e) {
 			if(!interrupted()) {
 				logger.error(e.getMessage(), e);
 			}
+		}finally {
+			oLatch.countDown();
 		}
 	}
 	
-	public void closeSocket() {
-		this.isContinued = false;
-		Thread.currentThread().interrupt();
+	public void terminate() {
+		synchronized (oLock) {
+			this.isContinued = false;
+			Thread.currentThread().interrupt();
+		}
 	}
 }

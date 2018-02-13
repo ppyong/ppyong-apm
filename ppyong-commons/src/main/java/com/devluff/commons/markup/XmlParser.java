@@ -55,6 +55,7 @@ public class XmlParser {
 	}
 	
 	public boolean findElement(String strElementName) {
+		// first finding
 		if(oRootElement == null) {
 			Element oTempElement = oDocument.getRootElement();
 			String strTempElementName = oTempElement.getName();
@@ -68,22 +69,16 @@ public class XmlParser {
 			}
 		}
 		
+		List<Element> listChildrenElement = null;
+		// first finding after intoToElement 
 		if(oCurrentElement == null) {
-			List<Element> listChildrenElement = oParentElement.getChildren();
-			for(int i = nCurrentPosition; i < listChildrenElement.size(); i++) {
-				Element oTempCurrentElement = listChildrenElement.get(i);
-				String strTempCurrentElementName = oTempCurrentElement.getName();
-				if(strTempCurrentElementName.equals(strElementName)) {
-					nCurrentPosition = i;
-					oCurrentElement = oTempCurrentElement;
-					return true;
-				}
-			}
-			
-			return false;
+			listChildrenElement = oParentElement.getChildren();
+		}
+		// other..
+		else {
+			listChildrenElement = oCurrentElement.getChildren();
 		}
 		
-		List<Element> listChildrenElement = oCurrentElement.getChildren();
 		for(int i = nCurrentPosition; i < listChildrenElement.size(); i++) {
 			Element oTempCurrentElement = listChildrenElement.get(i);
 			String strTempCurrentElementName = oTempCurrentElement.getName();
@@ -167,6 +162,7 @@ public class XmlParser {
 	 	    StringBuffer oSb = sw.getBuffer();
 	 	    return oSb.toString();
 	    }catch (Exception e) {
+	    		logger.error(e.getMessage());
 	    		return "";
 		}
 	}
@@ -190,6 +186,7 @@ public class XmlParser {
 	    	 	oOutp.output(oTempRoot, oFw);
 	 	    return true;
 	    }catch (Exception e) {
+	    		logger.error(e.getMessage());
 	    		return false;
 		}
 	}

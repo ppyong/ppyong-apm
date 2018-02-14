@@ -167,13 +167,13 @@ public class XmlParser {
 		return true;
 	}
 	
-	// ÇöÀç °¡¸®Å°´Â Element ÇÏÀ§ Node Element¸¦ Ãß°¡ÇÏ°í °¡¸®Å²´Ù.
+	// í˜„ì¬ ê°€ë¦¬í‚¤ëŠ” Element í•˜ìœ„ Node Elementë¥¼ ì¶”ê°€í•˜ê³  ê°€ë¦¬í‚¨ë‹¤.
 	public boolean addChildElement(String strElementName) {
 		return addChildElement(strElementName, "");
 	}
 	
 	public boolean addChildElement(String strElementName, String strContent) {
-		// xml µ¥ÀÌÅÍ¸¦ »õ·Î ¸¸µé °æ¿ì loadXml È¤Àº setDoc Àº È£ÃâµÇÁö ¾ÊÀ¸¹Ç·Î document °´Ã¼ºÎÅÍ »õ·Î »ı¼ºÇÏ¿© root element ¸¦ »ı¼ºÇÑ´Ù.
+		// xml ë°ì´í„°ë¥¼ ìƒˆë¡œ ë§Œë“¤ ê²½ìš° loadXml í˜¹ì€ setDoc ì€ í˜¸ì¶œë˜ì§€ ì•Šìœ¼ë¯€ë¡œ document ê°ì²´ë¶€í„° ìƒˆë¡œ ìƒì„±í•˜ì—¬ root element ë¥¼ ìƒì„±í•œë‹¤.
 		if(oDocument == null) {
 			try {
 				DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -234,7 +234,7 @@ public class XmlParser {
 			return false;
 		oLastElement = oCurrentElement;
 		List<Element> listChildElement = oCurrentElement.getChildren();
-		// ¾Õ¿¡ child ºÎÅÍ Áö¿ï °æ¿ì µÚ¿¡ ÀÖ´ø µ¥ÀÌÅÍ°¡ ¾ÕÀ¸·Î ¾Õ´ç°ÜÁö¸é¼­ for ¹®À» Á¤»óÀûÀ¸·Î ¼öÇà ÇÒ ¼ö ¾ø´Ù. µû¶ó¼­ µÚ¿¡ºÎÅÍ Áö¿î´Ù.
+		// ì•ì— child ë¶€í„° ì§€ìš¸ ê²½ìš° ë’¤ì— ìˆë˜ ë°ì´í„°ê°€ ì•ìœ¼ë¡œ ì•ë‹¹ê²¨ì§€ë©´ì„œ for ë¬¸ì„ ì •ìƒì ìœ¼ë¡œ ìˆ˜í–‰ í•  ìˆ˜ ì—†ë‹¤. ë”°ë¼ì„œ ë’¤ì—ë¶€í„° ì§€ìš´ë‹¤.
 		for(int i = listChildElement.size() - 1; i >= 0; i--) {
 			Element oChildElement = listChildElement.get(i);
 			oCurrentElement.removeContent(oChildElement);

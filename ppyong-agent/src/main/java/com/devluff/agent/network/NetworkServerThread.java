@@ -9,17 +9,21 @@ import java.util.concurrent.CountDownLatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.devluff.agent.ApplicationManager;
 import com.devluff.agent.scheduler.Schedule;
 
 // 1) 정책을 받음
 // 2) 프로세스 종료 명령을 받음
+@Service
 public class NetworkServerThread extends Thread{
 	
 	private static final Logger logger = LoggerFactory.getLogger(NetworkServerThread.class);
 	
-	private boolean isContinued;
+	@Autowired private ApplicationManager oApplicationManager;
 	
+	private boolean isContinued;
 	private ServerSocket oServerSocket;
 	private Object oLock;
 	private CountDownLatch oLatch;
@@ -43,6 +47,14 @@ public class NetworkServerThread extends Thread{
 				Socket oSocket = oServerSocket.accept();
 				synchronized (oLock) {
 					// 작업 
+					
+					// 종료
+//					if(){
+//						oApplicationManager.terminateProcess();
+//					}
+//					else if() {
+//						
+//					}
 				}
 			}
 		}catch (Exception e) {

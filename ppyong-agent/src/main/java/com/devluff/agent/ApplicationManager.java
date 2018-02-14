@@ -43,4 +43,10 @@ public class ApplicationManager {
 		}
 		return true;
 	}
+	
+	public boolean terminateProcess() {
+		oNetworkClientThread.terminate();
+		oNetworkServerThread.terminate();
+		return true;
+	}
 }

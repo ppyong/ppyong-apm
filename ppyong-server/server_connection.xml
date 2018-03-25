@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server>
+	<ip>192.1.1.1</ip>
+	<port>443</port>
+	<ssl enable="1" version="TLSv1.0" />
+</server>

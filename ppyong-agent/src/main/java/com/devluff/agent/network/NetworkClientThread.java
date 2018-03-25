@@ -1,5 +1,8 @@
 package com.devluff.agent.network;
 
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.Socket;
 import java.util.concurrent.CountDownLatch;
 
 import org.slf4j.Logger;
@@ -23,6 +26,7 @@ public class NetworkClientThread extends Thread{
 	private boolean isContinued;
 	private Object oLock;
 	private CountDownLatch oLatch;
+	private Socket oSocket;
 	
 	public NetworkClientThread() {
 		this("NetworkClientThread");
@@ -36,13 +40,30 @@ public class NetworkClientThread extends Thread{
 		this.oLatch = oLatch;
 	}
 	
+	public boolean init() {
+		try {
+			oSocket = new Socket("", 0);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			return false;
+		}
+		return true;
+	}
+	
+	// System을 통해
 	public void run() {
 		isContinued = true;
 		try {
 			while(isContinued) {
-				String task = oSchedule.getTaskFromTaskQue();
+				String task = oSchedule.getSystemCheckResultFromQue();
 				synchronized (oLock) {
 					// 작업 
+					OutputStream oOs = oSocket.getOutputStream();
+					oOs.write("".getBytes());
+					oOs.flush();
+					
+					InputStream oIs = oSocket.getInputStream();
+					//....
 				}
 			}
 		}catch (Exception e) {

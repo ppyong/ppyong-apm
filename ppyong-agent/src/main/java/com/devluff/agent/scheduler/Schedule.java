@@ -11,18 +11,18 @@ import org.springframework.stereotype.Service;
 public class Schedule {
 	
 	private static final Logger logger = LoggerFactory.getLogger(Schedule.class);
-	private BlockingQueue<String> taskQue;
+	private BlockingQueue<String> queSystemCheckResult;
 	
 	public Schedule() {
-		taskQue = new ArrayBlockingQueue<>(100);
+		queSystemCheckResult = new ArrayBlockingQueue<>(100);
 	}
 
-	public boolean addToTaskQue(String task) throws InterruptedException{
-		taskQue.put(task);
+	public boolean addToSystempCheckResultQue(String task) throws InterruptedException{
+		queSystemCheckResult.put(task);
 		return true;
 	}
 	
-	public String getTaskFromTaskQue() throws InterruptedException{
-		return taskQue.take();
+	public String getSystemCheckResultFromQue() throws InterruptedException{
+		return queSystemCheckResult.take();
 	}
 }

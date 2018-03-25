@@ -45,6 +45,10 @@ public class FileUtil {
 		return true;
 	}
 	
+	public static boolean writeByteArrayToFile() {
+		return true;
+	}
+	
 	public static boolean deleteFile(String strFilePath) {
 		File oTempFile = new File(strFilePath);
 		return deleteFile(oTempFile);

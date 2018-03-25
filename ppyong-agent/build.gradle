@@ -5,10 +5,10 @@ repositories {
     maven { url "http://jcenter.bintray.com"}
 }
 
-dependencies {
-    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
-    compile 'io.netty:netty-all:4.0.4.Final'
-	compile 'org.postgresql:postgresql:9.4-1201-jdbc41'
+dependencies {    	
+	compile 'org.springframework.boot:spring-boot-starter'
+	compile 'org.quartz-scheduler:quartz:2.2.1'
+    	compile 'io.netty:netty-all:4.0.4.Final'
     compile project(':ppyong-commons')
 }
 

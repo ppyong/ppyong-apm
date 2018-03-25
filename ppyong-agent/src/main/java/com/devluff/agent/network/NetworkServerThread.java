@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.devluff.agent.ApplicationManager;
-import com.devluff.agent.scheduler.Schedule;
 
 // 1) 정책을 받음
 // 2) 프로세스 종료 명령을 받음
@@ -48,6 +47,12 @@ public class NetworkServerThread extends Thread{
 				synchronized (oLock) {
 					// 작업 
 					
+					// 스케쥴 변경 
+//				boolean bResult = oApplicationManager.changeAgentScheduleInfo();
+//				if (!bResult) {
+//					logger.error("Fail to change agent schedule...");
+//				}
+
 					// 종료
 //					if(){
 //						oApplicationManager.terminateProcess();

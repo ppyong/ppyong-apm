@@ -1,4 +1,4 @@
-package com.devluff.agent;
+package com.devluff.server;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -7,10 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.devluff.agent.network.NetworkClientThread;
-import com.devluff.agent.network.NetworkServerThread;
-import com.devluff.agent.scheduler.AgentScheduleInfo;
-import com.devluff.agent.scheduler.AgentScheduleManager;
+import com.devluff.server.network.NetworkClientThread;
+import com.devluff.server.network.NetworkServerThread;
 
 @Service
 public class ApplicationManager {
@@ -19,13 +17,11 @@ public class ApplicationManager {
 	
 	@Autowired private NetworkClientThread oNetworkClientThread;
 	@Autowired private NetworkServerThread oNetworkServerThread;
-	@Autowired private AgentScheduleManager oAgentScheduleManager;
+	@Autowired private ApplicationConfig oApplicationConfig;
 	
 	private CountDownLatch oLatch;
-	private ApplicationConfig oApplicationConfig;
 	
-	public ApplicationManager() throws Exception{
-		oApplicationConfig = new ApplicationConfig();
+	public ApplicationManager() {
 	}
 	
 	public boolean init() {
@@ -36,18 +32,10 @@ public class ApplicationManager {
 		oLatch = new CountDownLatch(2);
 		oNetworkClientThread.setCountDownLatch(oLatch);
 		oNetworkServerThread.setCountDownLatch(oLatch);
-		
-		AgentScheduleInfo oAgentScheduleInfo = oApplicationConfig.getAgentScheduleInfo();
-		oAgentScheduleManager.setScheduleConfig(oAgentScheduleInfo);
 		return true;
 	}
 	
 	public boolean process() {
-		if(!oAgentScheduleManager.startSchedule()) {
-			logger.error("Fail to start agent schedule manager..");
-			return false;
-		}
-		
 		oNetworkClientThread.start();
 		oNetworkServerThread.start();
 		try {
@@ -64,13 +52,6 @@ public class ApplicationManager {
 	public boolean terminateProcess() {
 		oNetworkClientThread.terminate();
 		oNetworkServerThread.terminate();
-		return true;
-	}
-	
-	public boolean changeAgentScheduleInfo() {
-		AgentScheduleInfo oAgentScheduleInfo = oApplicationConfig.getAgentScheduleInfo();
-		oAgentScheduleManager.setScheduleConfig(oAgentScheduleInfo);
-		oAgentScheduleManager.reloadSchedule();
 		return true;
 	}
 }

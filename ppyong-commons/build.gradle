@@ -5,5 +5,7 @@ repositories {
 dependencies {
 	compile 'org.jdom:jdom2:2.0.5'
 	compile 'org.apache.commons:commons-compress:1.16.1'
+	compile 'joda-time:joda-time:2.9.9'
+	compile 'com.google.guava:guava:24.1-jre'
 }
 

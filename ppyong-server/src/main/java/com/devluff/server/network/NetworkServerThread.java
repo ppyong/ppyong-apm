@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.devluff.server.ApplicationConfig;
-
+import com.devluff.server.network.handler.NetworkServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -60,6 +60,8 @@ public class NetworkServerThread extends Thread {
 			});
 			ChannelFuture cf = oServer.bind(oApplicationConfig.getServerPORT()).sync();
 			cf.channel().closeFuture().sync();
+			
+			
 		}catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}finally {

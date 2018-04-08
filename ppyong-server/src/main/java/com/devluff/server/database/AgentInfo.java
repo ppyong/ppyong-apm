@@ -4,16 +4,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
 
 @IdClass(AgentInfoPK.class)
 @Entity(name="agent_info")
 public class AgentInfo {
     @Id
-    @Column(name="agent_ip")
+    @JoinColumn(name="agent_ip")
     private String strAgentIP;
     
     @Id
-    @Column(name="mac_address")
+    @JoinColumn(name="mac_address")
     private String strMacAddress;
     
     @Column(name="last_access_time")

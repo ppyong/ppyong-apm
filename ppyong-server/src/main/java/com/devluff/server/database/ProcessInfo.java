@@ -1,5 +1,6 @@
 package com.devluff.server.database;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,7 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumns;
+import javax.persistence.OneToOne;
 
 @Entity(name="process_info")
 public class ProcessInfo {
@@ -16,14 +18,17 @@ public class ProcessInfo {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long lNum;
     
-    @ManyToOne(targetEntity=AgentInfo.class, fetch=FetchType.LAZY)
-    @JoinColumn(name="agent_info_id")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumns({
+        @JoinColumn(name="agent_id"),
+        @JoinColumn(name="mac_address")
+    })
     private AgentInfo oAgentInfo;
     
-    @ManyToOne(targetEntity=SystemInfo.class, fetch=FetchType.LAZY)
-    @JoinColumn(name="system_info_id")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name="num")
     private SystemInfo oSystemInfo;
-
+    
     @Column(name="process_pid")
     private int nProcessPID;
     

@@ -28,7 +28,7 @@ public class ApplicationConfig {
 	public int getServerPORT() {
 		return this.nServerPORT;
 	}
-
+	
 	private boolean readServerConnectionConfig() {
 		XmlParser parser = new XmlParser();
 		
